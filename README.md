@@ -8,8 +8,8 @@ The Easiest Way 😅!!
 C:\> type CON >> hello.lua
 print("Hello, World!")
 ^Z
-C:\> copy /b lua.exe+hello.lua hello.exe
-lua.exe
+C:\> copy /b lua51.exe+hello.lua hello.exe
+lua51.exe
 hello.lua
         1 file(s) copied.
 C:\> hello.exe
