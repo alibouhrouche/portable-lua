@@ -20,3 +20,10 @@ Hello, World!
 1. Support Embedding lua modules
 2. Support Embedding lua C modules (**Experimental**)
 3. Support Embedding lua C modules Dependencies (**Experimental**)
+
+### This Project Use
+[lua-51](https://www.lua.org/)
+
+[srlua](https://github.com/LuaDist/srlua)
+
+[MemoryModule](https://github.com/fancycode/MemoryModule)
