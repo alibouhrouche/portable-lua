@@ -883,9 +883,9 @@ static int fplua_setR(lua_State *L){
 }
 
 static int plua_fread(lua_State *L){
-    unsigned int n = luaL_checknumber(L, 2);
-    unsigned int t = luaL_checknumber(L, 3);
-    unsigned int c = luaL_checknumber(L, 4);
+    unsigned int n = luaL_checknumber(L, 1);
+    unsigned int t = luaL_checknumber(L, 2);
+    unsigned int c = luaL_checknumber(L, 3);
     if(n > 0 && n < g_ch->chead.nofsec+1){
         fseek(g_ch->f,g_ch->offsets[n-1]+g_ch->pos[n-1],SEEK_SET);
         lua_newtable(L);
@@ -895,7 +895,7 @@ static int plua_fread(lua_State *L){
             {
                 case 1:
                     {
-                        unsigned int s = luaL_checknumber(L, 5);
+                        unsigned int s = luaL_checknumber(L, 4);
                         char *data = malloc(s);
                         fread(data,s,1,g_ch->f);
                         lua_pushlstring(L,data,s);
