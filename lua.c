@@ -882,48 +882,6 @@ static int fplua_setR(lua_State *L){
     return 0;
 }
 
-static int plua_fread(lua_State *L){
-    unsigned int n = luaL_checknumber(L, 1);
-    unsigned int t = luaL_checknumber(L, 2);
-    unsigned int c = luaL_checknumber(L, 3);
-    if(n > 0 && n < g_ch->chead.nofsec+1){
-        fseek(g_ch->f,g_ch->offsets[n-1]+g_ch->pos[n-1],SEEK_SET);
-        lua_newtable(L);
-        unsigned int p = 0;
-        for (unsigned int i = 0;i<c;i++){
-            switch (t)
-            {
-                case 1:
-                    {
-                        unsigned int s = luaL_checknumber(L, 4);
-                        char *data = malloc(s);
-                        fread(data,s,1,g_ch->f);
-                        lua_pushlstring(L,data,s);
-                        lua_rawseti(L,-2,i+1);
-                        free(data);
-                    }
-                    break;
-                case 2:{
-                        double data;
-                        fread(&data,sizeof(double),1,g_ch->f);
-                        lua_pushnumber(L,data);
-                        lua_rawseti(L,-2,i+1);
-                    }
-                    break;
-                case 3:{
-                        int data;
-                        fread(&data,sizeof(int),1,g_ch->f);
-                        lua_pushinteger(L,data);
-                        lua_rawseti(L,-2,i+1);
-                    }
-                    break;
-            }
-        }
-        return 1;
-    }
-    return 0;
-}
-
 static int fplua_fread(lua_State *L){
     CORE_HANDLE **ch = tochp(L);
     unsigned int n = luaL_checknumber(L, 2);
@@ -1256,7 +1214,6 @@ static const luaL_Reg plualib[] = {
   {"list",          plua_list},
   {"load",          plua_load},
   {"new" ,          plua_new},
-  {"fread",         plua_fread},
   {"resetrequire",  plua_resR},
   {NULL, NULL}
 };
