@@ -737,6 +737,7 @@ static int plua_new(lua_State *L){
     lua_setmetatable(L, -2);
     (*ch)->_io = 1;
     (*ch)->chead.nofsec = n;
+    memset((*ch)->chead.conf,0,sizeof(int));
     (*ch)->wtype = malloc(sizeof(uint8_t)*n+1);
     memset((*ch)->wtype,0,sizeof(uint8_t)*n+1);
     (*ch)->data = malloc(sizeof(void*)*n+1);
@@ -1255,6 +1256,7 @@ static const luaL_Reg plualib[] = {
   {"list",          plua_list},
   {"load",          plua_load},
   {"new" ,          plua_new},
+  {"fread",         plua_fread},
   {"resetrequire",  plua_resR},
   {NULL, NULL}
 };
